@@ -4,7 +4,7 @@ def send(val):
     print(val)
 
 def createButton(window, column, row, val):
-    button = Button(window, text=val, width=6, height=3,borderwidth=1, command=lambda val=val: send(val))
+    button = Button(window, text=val, width=6, height=3,borderwidth=1,bg="#000000", fg="#fff", command=lambda val=val: send(val))
     button.grid(row=row, column = column)
     return button
 def keyboard():
