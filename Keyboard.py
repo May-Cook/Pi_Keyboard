@@ -1,4 +1,5 @@
 from tkinter import *
+
 def send(val):
     print(val)
 
@@ -57,6 +58,8 @@ def keyboard():
     AltLKey = createButton(home, 3, 6, "Alt")
     SpaceKey = Button(home, text=" ", width=30, height=3,borderwidth=1, command=lambda val=" ": send(val))
     SpaceKey.grid(column = 4, row=6, columnspan=5)
+
+    home.mainloop()
     
 
     
