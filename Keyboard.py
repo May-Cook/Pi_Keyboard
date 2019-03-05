@@ -3,9 +3,11 @@ from tkinter import *
 def send(val):
     print(val)
 
-def createButton(window, column, row, val):
-    button = Button(window, text=val, width=6, height=3,borderwidth=1,bg="#000000", fg="#fff", command=lambda val=val: send(val))
-    button.grid(row=row, column = column)
+def createButton(window, column, row, val, label="", columnSpan = 1):
+    if label == "":
+        label = val
+    button = Button(window, text=label, width=6, height=3,borderwidth=1,bg=bg, fg=fg, command=lambda val=val: send(val))
+    button.grid(row=row, column=column, columnspan=columnSpan)
     return button
 def keyboard():
     home = Tk()
@@ -17,8 +19,8 @@ def keyboard():
     #BackKey.grid(row=1, column=0)
     #Key = createButton(home, , , "")
     
-    VDownKey = createButton(home, 13, 1, "⇩")
-    VUpKey = createButton(home, 12, 1, "⇧")
+    VolDownKey = createButton(home, 13, 1, "VolDown", "⇩")
+    VolUpKey = createButton(home, 12, 1, "VolUp", "⇧")
     
     
     QKey = createButton(home, 2, 3, "Q")
@@ -56,8 +58,10 @@ def keyboard():
     CtrlKey = createButton(home, 1, 6, "Ctrl")
     WinLKey = createButton(home, 2, 6, "Win")
     AltLKey = createButton(home, 3, 6, "Alt")
-    SpaceKey = Button(home, text=" ", width=30, height=3,borderwidth=1, command=lambda val=" ": send(val))
-    SpaceKey.grid(column = 4, row=6, columnspan=5)
+    SpaceKey = createButton(home, 4, 6, " ", columnSpan=4)
+
+    #SpaceKey = Button(home, text=" ", width=30, height=3,borderwidth=1, command=lambda val=" ": send(val))
+    #SpaceKey.grid(column = 4, row=6, columnspan=5)
 
     home.mainloop()
     
@@ -65,7 +69,8 @@ def keyboard():
     
 
 
-    
+bg = "#000000"
+fg= "#fff"
 
 
 
