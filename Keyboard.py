@@ -43,60 +43,37 @@ def keyboard():
     #button5.pack(side=LEFT)
     #button6.pack(side=LEFT)
 
-
+    #Key = createButton(row, "")
+    
+    VolDownKey = createButton(row1, "VolDown", label="⇩")
+    VolUpKey = createButton(row1, "VolUp", label="⇧")
+    
+    OneKey = createButton(row2, "1")
+    TwoKey = createButton(row2, "2")
+    ThreeKey = createButton(row2, "3")
+    FourKey = createButton(row2, "4")
+    FiveKey = createButton(row2, "5")
+    SixKey = createButton(row2, "6")
+    SevenKey = createButton(row2, "7")
+    EightKey = createButton(row2, "8")
+    NineKey = createButton(row2, "9")
+    TenKey = createButton(row2, "0") 
 
     
-
-
-
-
-
-
-
-    #CtrlKey = Button(home, text = "Ctrl",width=3,height=1,borderwidth=1, command=lambda: send("Ctrl"))
-    #CtrlKey.grid(row=0, column=1)
-    #BackKey = Button(home, text = "<--",width=3,height=1,borderwidth=1, command=lambda: send("Back"))
-    #BackKey.grid(row=1, column=0)
-    #Key = createButton(home, , , "")
-    
-    #VolDownKey = createButton(home, 13, 1, "VolDown", "⇩")
-    #VolUpKey = createButton(home, 12, 1, "VolUp", "⇧")
-    
-    #OneKey = createButton(home, 2, 2, "1")
-    #TwoKey = createButton(home, 3, 2, "2")
-    #ThreeKey = createButton(home, 4, 2, "3")
-    #FourKey = createButton(home, 5, 2, "4")
-    #FiveKey = createButton(home, 6, 2, "5")
-    #SixKey = createButton(home, 7, 2, "6")
-    #SevenKey = createButton(home, 8, 2, "7")
-    #EightKey = createButton(home, 9, 2, "8")
-    #NineKey = createButton(home, 10, 2, "9")
-    #TenKey = createButton(home, 11, 2, "0")
-    
-
-
-
-
-
-    
-    
-    
-    
-    
-    EnterKey = createButton(row3,"\n", "↵")
-    SqBr2Key = createButton(row3, "]")
-    SqBr1Key = createButton(row3, "[")
-    PKey = createButton(row3, "P")
-    OKey = createButton(row3, "O")
-    IKey = createButton(row3,"I")
-    UKey = createButton(row3, "U")
-    YKey = createButton(row3, "Y")
-    TKey = createButton(row3, "T")
-    RKey = createButton(row3, "R")
-    EKey = createButton(row3, "E")
-    WKey = createButton(row3, "W")
-    QKey = createButton(row3, "Q")
     TabKey = createButton(row3, "Tab")
+    QKey = createButton(row3, "Q")
+    WKey = createButton(row3, "W")
+    EKey = createButton(row3, "E")
+    RKey = createButton(row3, "R")
+    TKey = createButton(row3, "T")
+    YKey = createButton(row3, "Y")
+    UKey = createButton(row3, "U")
+    IKey = createButton(row3, "I")
+    OKey = createButton(row3, "O")
+    PKey = createButton(row3, "P")
+    SqBr1Key = createButton(row3, "[")
+    SqBr2Key = createButton(row3, "]")
+    EnterKey = createButton(row3,"\n", "↵")
     
     CtrlKey = createButton(row4, "Ctrl", width=9)
     AKey = createButton(row4, "A")
@@ -119,13 +96,10 @@ def keyboard():
     MKey = createButton(row5, "M")
     
 
-    #CtrlKey = createButton(home, 1, 6, "Ctrl")
-    #WinLKey = createButton(home, 2, 6, "Win")
-    #AltLKey = createButton(home, 3, 6, "Alt")
-    #SpaceKey = createButton(home, 4, 6, " ", columnSpan=5, width=30)
-
-    #SpaceKey = Button(home, text=" ", width=30, height=3,borderwidth=1, command=lambda val=" ": send(val))
-    #SpaceKey.grid(column = 4, row=6, columnspan=5)
+    CtrlKey = createButton(row6, "Ctrl")
+    WinLKey = createButton(row6, "Win")
+    AltLKey = createButton(row6, "Alt")
+    SpaceKey = createButton(row6, " ", width=30)
 
     home.mainloop()
     
