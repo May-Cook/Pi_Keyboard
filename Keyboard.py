@@ -1,13 +1,29 @@
 from tkinter import *
 #import pyautogui
 
+text = ""
+
 def send(val):
+#    global text
+#    
+#    if val == "Back":
+#        text = text[0:len(text)-1]
+#    elif val == "\n":
+#        text = ""
+#    else:
+#        text += val
+#    print(text)
+
     print(val)
 
-def createButton(row, val, label="", width=6, height=3):
+#def ctrl():
+#    print("test")
+    
+
+def createButton(row, val, other="", label="", width=6, height=3):
     if label == "":
         label = val
-    button = Button(row, text=label, width=width, height=height,borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda val=val: send(val))
+    button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda val=val: send(val))
     button.pack(side=LEFT)
     #button.grid(row=row, column=column, columnspan=columnSpan, sticky=W,)
     return button
@@ -15,6 +31,7 @@ def keyboard():
     home = Tk()
     home.title("keyboard")
     home.geometry("800x480")
+    home.resizable(False, False)
     home["bg"]="#000000"
     row1 = Frame(home)
     row1.pack(side=TOP, anchor=W)
@@ -44,23 +61,32 @@ def keyboard():
     #button6.pack(side=LEFT)
 
     #Key = createButton(row, "")
-    
+
+    macroFrame = Frame(row1)
+    macroFrame.pack(fill=NONE, padx=199, pady=5, side=LEFT)
+    MuteKey = createButton(row1, "Mute", label="Mute")
+    PlayPauseKey = createButton(row1, "PlayPause", label="▶/⏯️")
     VolDownKey = createButton(row1, "VolDown", label="⇩")
     VolUpKey = createButton(row1, "VolUp", label="⇧")
     
-    OneKey = createButton(row2, "1")
-    TwoKey = createButton(row2, "2")
-    ThreeKey = createButton(row2, "3")
-    FourKey = createButton(row2, "4")
-    FiveKey = createButton(row2, "5")
-    SixKey = createButton(row2, "6")
-    SevenKey = createButton(row2, "7")
-    EightKey = createButton(row2, "8")
-    NineKey = createButton(row2, "9")
-    TenKey = createButton(row2, "0") 
+    AccentKey = createButton(row2, "`", other="¬")
+    OneKey = createButton(row2, "1", other="!")
+    TwoKey = createButton(row2, "2", other="\"")
+    ThreeKey = createButton(row2, "3", other="£")
+    FourKey = createButton(row2, "4", other="$")
+    FiveKey = createButton(row2, "5", other="%")
+    SixKey = createButton(row2, "6", other="^")
+    SevenKey = createButton(row2, "7", other="&")
+    EightKey = createButton(row2, "8", other="*")
+    NineKey = createButton(row2, "9", other="(")
+    TenKey = createButton(row2, "0", other=")")
+    MinusKey = createButton(row2, "-", other="_")
+    EqualKey = createButton(row2, "=", other="+")
+    BackKey = createButton(row2, "Back", label="⟵", other="", width=13)
+    
 
     
-    TabKey = createButton(row3, "Tab")
+    TabKey = createButton(row3, "Tab", width=9)
     QKey = createButton(row3, "Q")
     WKey = createButton(row3, "W")
     EKey = createButton(row3, "E")
@@ -71,11 +97,11 @@ def keyboard():
     IKey = createButton(row3, "I")
     OKey = createButton(row3, "O")
     PKey = createButton(row3, "P")
-    SqBr1Key = createButton(row3, "[")
-    SqBr2Key = createButton(row3, "]")
-    EnterKey = createButton(row3,"\n", "↵")
+    SqBrOKey = createButton(row3, "[", other="{")
+    SqBrCKey = createButton(row3, "]", other="}")
+    EnterKey = createButton(row3,"\n", "↵", width=12)
     
-    CtrlKey = createButton(row4, "Ctrl", width=9)
+    CapsKey = createButton(row4, "Caps Lock", width=12)
     AKey = createButton(row4, "A")
     SKey = createButton(row4, "S")
     DKey = createButton(row4, "D")
@@ -85,8 +111,12 @@ def keyboard():
     JKey = createButton(row4, "J")
     KKey = createButton(row4, "K")
     LKey = createButton(row4, "L")
+    SemiColonKey = createButton(row4, ";", other=":")
+    ApostropheKey = createButton(row4, "'", other="@")
+    HashKey = createButton(row4, "#", other="~")
 
-    ShiftKey = createButton(row5, "Shift")
+    ShiftLKey = createButton(row5, "Shift", width=9)
+    BSlashKey = createButton(row5, "\\", other="|")
     ZKey = createButton(row5, "Z")
     XKey = createButton(row5, "X")
     CKey = createButton(row5, "C")
@@ -94,12 +124,22 @@ def keyboard():
     BKey = createButton(row5, "B")
     NKey = createButton(row5, "N")
     MKey = createButton(row5, "M")
+    CommaKey = createButton(row5, ",", other="<")
+    StopKey = createButton(row5, ".", other=">")
+    FSlashKey = createButton(row5, "/", other="?")
+    shiftRKey = createButton(row5, "Shift", width=18)
+    
     
 
-    CtrlKey = createButton(row6, "Ctrl")
+    CtrlLKey = createButton(row6, "Ctrl", width = 11)
+#    CtrlLKey.bind("<ButtonRelease-1>", ctrl)
     WinLKey = createButton(row6, "Win")
     AltLKey = createButton(row6, "Alt")
-    SpaceKey = createButton(row6, " ", width=30)
+    SpaceKey = createButton(row6, " ", width=36)
+    UnicodeKey = createButton(row6, "Unicode", width=9)
+    WinRKey = createButton(row6, "Win")
+    MenuKey = createButton(row6, "Menu")
+    CtrlRKey = createButton(row6, "Ctrl", width=11)
 
     home.mainloop()
     
