@@ -135,7 +135,7 @@ def keyboard():
 #    CtrlLKey.bind("<ButtonRelease-1>", ctrl)
     WinLKey = createButton(row6, "Win")
     AltLKey = createButton(row6, "Alt")
-    SpaceKey = createButton(row6, " ", width=36)
+    SpaceKey = createButton(row6, " ", width=43)
     UnicodeKey = createButton(row6, "Unicode", width=9)
     WinRKey = createButton(row6, "Win")
     MenuKey = createButton(row6, "Menu")
