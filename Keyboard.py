@@ -1,12 +1,13 @@
 from tkinter import *
 #import pyautogui
 
-# global variables:
+### global variables: ###
 bg = "#000e26"
 fg = "#4286f4"
 caps = False
 shift = False
 text = ""
+#########################
 
 def send(val):
 #    global text
@@ -20,17 +21,56 @@ def send(val):
 #    print(text)
 
     print(val)
-    
+
+def enter(val, capsVal, shiftVal):
+    if shift:
+        if shift!="":
+            send(shiftVal)
+        elif capsVal != "":
+            send(capsVal)
+        else:
+            send(val)
+    elif caps:
+        if capsVal != "":
+            send(capsVal)
+        else:
+            send(val)
+    else:
+        send(val)
+
+
+def shiftChange(val, capsVal, shiftVal):
+    global shift
+    if shift:
+        shift=False
+        send("ShiftOff")
+    else:
+        shift=True
+        send("ShiftOn")
+
+def capsChange(val, capsVal, shiftVal):
+    global caps
+    if caps:
+        caps=False
+        send("CapsOff")
+    else:
+        caps=True
+        send("CapsOn")
 
 
 
-
-def createButton(row, val, capsVal="caps", shiftVal="", other="", label="", width=6, height=3):
+def createButton(row, val, capsVal="", shiftVal="", other="", label="", varChange="", width=6, height=3):
+    global caps, shift
     if label == "":
         label = val
-    if shiftVal == "":
-        shiftVal = capsVal
-    button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda val=val: send(val))
+
+
+    if varChange == "caps":
+        button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda: capsChange(val, capsVal, shiftVal))
+    elif varChange == "shift":
+        button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda: shiftChange(val, capsVal, shiftVal))
+    else:
+        button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda: enter(val, capsVal, shiftVal))
     button.pack(side=LEFT)
     #button.grid(row=row, column=column, columnspan=columnSpan, sticky=W,)
     return button
@@ -80,7 +120,7 @@ def mainBoard():
     BackKey = createButton(row2, "Back", label="⟵", other="", width=13)
         
     TabKey = createButton(row3, "Tab", width=9)
-    QKey = createButton(row3, "Q")
+    QKey = createButton(row3, "q", capsVal="Q")
     WKey = createButton(row3, "W")
     EKey = createButton(row3, "E")
     RKey = createButton(row3, "R")
@@ -94,7 +134,7 @@ def mainBoard():
     SqBrCKey = createButton(row3, "]", other="}")
     EnterKey = createButton(row3,"\n", "↵", width=12)
     
-    CapsKey = createButton(row4, "Caps Lock", width=12)
+    CapsKey = createButton(row4, "Caps Lock", width=12, varChange="caps")
     AKey = createButton(row4, "A")
     SKey = createButton(row4, "S")
     DKey = createButton(row4, "D")
