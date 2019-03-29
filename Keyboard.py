@@ -20,14 +20,17 @@ def send(val):
 #    print("test")
     
 
-def createButton(row, val, other="", label="", width=6, height=3):
+def createButton(row, val, other="", label="", width=6, height=3, link=False):
     if label == "":
         label = val
-    button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda val=val: send(val))
+    if link:
+        button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda val=val: send(val))
+    else:
+        button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda val=val: send(val))
     button.pack(side=LEFT)
     #button.grid(row=row, column=column, columnspan=columnSpan, sticky=W,)
     return button
-def keyboard():
+def mainBoard():
     home = Tk()
     home.title("keyboard")
     home.geometry("800x480")
@@ -101,7 +104,7 @@ def keyboard():
     SqBrCKey = createButton(row3, "]", other="}")
     EnterKey = createButton(row3,"\n", "↵", width=12)
     
-    CapsKey = createButton(row4, "Caps Lock", width=12)
+    CapsKey = createButton(row4, "Caps Lock", width=12, link=True)
     AKey = createButton(row4, "A")
     SKey = createButton(row4, "S")
     DKey = createButton(row4, "D")
@@ -132,7 +135,8 @@ def keyboard():
     
 
     CtrlLKey = createButton(row6, "Ctrl", width = 11)
-#    CtrlLKey.bind("<ButtonRelease-1>", ctrl)
+#    CtrlLKey.bind("<ButtonRelease-1>", "ctrl")
+
     WinLKey = createButton(row6, "Win")
     AltLKey = createButton(row6, "Alt")
     SpaceKey = createButton(row6, " ", width=43)
@@ -142,9 +146,6 @@ def keyboard():
     CtrlRKey = createButton(row6, "Ctrl", width=11)
 
     home.mainloop()
-    
-
-    
 
 
 bg = "#000e26"
@@ -153,7 +154,7 @@ fg= "#4286f4"
 
 
 
-keyboard()
+mainBoard()
 
 
 
