@@ -22,10 +22,13 @@ def send(val):
 
     print(val)
 
-def enter(val, capsVal, shiftVal):
+def enter(val, capsVal, shiftVal, other):
+    global shift, caps
     if shift:
-        if shift!="":
+        if shiftVal!="":
             send(shiftVal)
+        elif other!="":
+            send(other)
         elif capsVal != "":
             send(capsVal)
         else:
@@ -37,9 +40,7 @@ def enter(val, capsVal, shiftVal):
             send(val)
     else:
         send(val)
-
-
-def shiftChange(val, capsVal, shiftVal):
+def shiftChange():
     global shift
     if shift:
         shift=False
@@ -47,8 +48,7 @@ def shiftChange(val, capsVal, shiftVal):
     else:
         shift=True
         send("ShiftOn")
-
-def capsChange(val, capsVal, shiftVal):
+def capsChange():
     global caps
     if caps:
         caps=False
@@ -57,26 +57,21 @@ def capsChange(val, capsVal, shiftVal):
         caps=True
         send("CapsOn")
 
-
-
-def createButton(row, val, capsVal="", shiftVal="", other="", label="", varChange="", width=6, height=3):
-    global caps, shift
+def createButton(row, val, capsVal="", shiftVal="", other="", label="", changeVal="", width=6, height=3):
     if label == "":
-        label = val
-
-
-    if varChange == "caps":
-        button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda: capsChange(val, capsVal, shiftVal))
-    elif varChange == "shift":
-        button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda: shiftChange(val, capsVal, shiftVal))
+        if capsVal!="":
+            label = capsVal
+        else:
+            label = val
+    if changeVal == "caps":
+        button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda: capsChange())
+    elif changeVal == "shift":
+        button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda: shiftChange())
     else:
-        button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda: enter(val, capsVal, shiftVal))
+        button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda: enter(val, capsVal, shiftVal, other))
     button.pack(side=LEFT)
     #button.grid(row=row, column=column, columnspan=columnSpan, sticky=W,)
     return button
-
-
-
 
 def mainBoard():
     home = Tk()
@@ -121,46 +116,46 @@ def mainBoard():
         
     TabKey = createButton(row3, "Tab", width=9)
     QKey = createButton(row3, "q", capsVal="Q")
-    WKey = createButton(row3, "W")
-    EKey = createButton(row3, "E")
-    RKey = createButton(row3, "R")
-    TKey = createButton(row3, "T")
-    YKey = createButton(row3, "Y")
-    UKey = createButton(row3, "U")
-    IKey = createButton(row3, "I")
-    OKey = createButton(row3, "O")
-    PKey = createButton(row3, "P")
+    WKey = createButton(row3, "w", capsVal="W")
+    EKey = createButton(row3, "e", capsVal="E")
+    RKey = createButton(row3, "r", capsVal="R")
+    TKey = createButton(row3, "t", capsVal="T")
+    YKey = createButton(row3, "y", capsVal="Y")
+    UKey = createButton(row3, "u", capsVal="U")
+    IKey = createButton(row3, "i", capsVal="I")
+    OKey = createButton(row3, "o", capsVal="O")
+    PKey = createButton(row3, "p", capsVal="P")
     SqBrOKey = createButton(row3, "[", other="{")
     SqBrCKey = createButton(row3, "]", other="}")
     EnterKey = createButton(row3,"\n", "↵", width=12)
     
-    CapsKey = createButton(row4, "Caps Lock", width=12, varChange="caps")
-    AKey = createButton(row4, "A")
-    SKey = createButton(row4, "S")
-    DKey = createButton(row4, "D")
-    FKey = createButton(row4, "F")
-    GKey = createButton(row4, "G")
-    HKey = createButton(row4, "H")
-    JKey = createButton(row4, "J")
-    KKey = createButton(row4, "K")
-    LKey = createButton(row4, "L")
+    CapsKey = createButton(row4, "Caps Lock", width=12, changeVal="caps")
+    AKey = createButton(row4, "a", capsVal="A")
+    SKey = createButton(row4, "s", capsVal="S")
+    DKey = createButton(row4, "d", capsVal="D")
+    FKey = createButton(row4, "f", capsVal="F")
+    GKey = createButton(row4, "g", capsVal="G")
+    HKey = createButton(row4, "h", capsVal="H")
+    JKey = createButton(row4, "j", capsVal="J")
+    KKey = createButton(row4, "k", capsVal="K")
+    LKey = createButton(row4, "l", capsVal="L")
     SemiColonKey = createButton(row4, ";", other=":")
     ApostropheKey = createButton(row4, "'", other="@")
     HashKey = createButton(row4, "#", other="~")
 
-    ShiftLKey = createButton(row5, "Shift", width=9)
+    ShiftLKey = createButton(row5, "Shift", width=9, changeVal="shift")
     BSlashKey = createButton(row5, "\\", other="|")
-    ZKey = createButton(row5, "Z")
-    XKey = createButton(row5, "X")
-    CKey = createButton(row5, "C")
-    VKey = createButton(row5, "V")
-    BKey = createButton(row5, "B")
-    NKey = createButton(row5, "N")
-    MKey = createButton(row5, "M")
+    ZKey = createButton(row5, "z", capsVal="Z")
+    XKey = createButton(row5, "x", capsVal="X")
+    CKey = createButton(row5, "c", capsVal="C")
+    VKey = createButton(row5, "v", capsVal="V")
+    BKey = createButton(row5, "b", capsVal="B")
+    NKey = createButton(row5, "n", capsVal="N")
+    MKey = createButton(row5, "m", capsVal="M")
     CommaKey = createButton(row5, ",", other="<")
     StopKey = createButton(row5, ".", other=">")
     FSlashKey = createButton(row5, "/", other="?")
-    shiftRKey = createButton(row5, "Shift", width=18)
+    shiftRKey = createButton(row5, "Shift", width=18, changeVal="shift")
     
     CtrlLKey = createButton(row6, "Ctrl", width = 11)
 
