@@ -10,12 +10,11 @@ caps = False
 shift = False
 ctrl = False
 alt = False
-text = ""
+# text = ""
 #########################
 
 def send(val):
 #    global text
-#    
 #    if val == "Back":
 #        text = text[0:len(text)-1]
 #    elif val == "\n":
@@ -132,6 +131,8 @@ def mainBoard():
     PlayPauseKey = createButton(row1, "PlayPause", label="▶/⏯️")
     VolDownKey = createButton(row1, "VolDown", label="⇩")
     VolUpKey = createButton(row1, "VolUp", label="⇧")
+    # indicatorFrame = Frame(row1)
+    # indicatorFrame.pack(fill=NONE, padx=100, pady=5, side=LEFT)
     
     AccentKey = createButton(row2, "`", other="¬")
     OneKey = createButton(row2, "1", other="!")
@@ -200,8 +201,16 @@ def mainBoard():
     WinRKey = createButton(row6, "Win")
     MenuKey = createButton(row6, "Menu")
     CtrlRKey = createButton(row6, "Ctrl", width=11, changeVal="ctrl")
+    
+
+
 
     home.mainloop()
+    # while True:
+    #     if caps:
+    #         CapsKey.config(relief=RAISED)
+    #     else:
+    #         CapsKey.config(relief=FLAT)
 
 
 
