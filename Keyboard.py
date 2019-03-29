@@ -6,6 +6,8 @@ bg = "#000e26"
 fg = "#4286f4"
 caps = False
 shift = False
+ctrl = False
+alt = False
 text = ""
 #########################
 
@@ -56,6 +58,22 @@ def capsChange():
     else:
         caps=True
         send("CapsOn")
+def ctrlChange():
+    global ctrl
+    if ctrl:
+        ctrl=False
+        send("CtrlOff")
+    else:
+        ctrl=True
+        send("CtrlOn")
+def altChange():
+    global alt
+    if alt:
+        alt=False
+        send("AltOff")
+    else:
+        alt=True
+        send("AltOn")
 
 def createButton(row, val, capsVal="", shiftVal="", other="", label="", changeVal="", width=6, height=3):
     if label == "":
@@ -67,6 +85,10 @@ def createButton(row, val, capsVal="", shiftVal="", other="", label="", changeVa
         button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda: capsChange())
     elif changeVal == "shift":
         button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda: shiftChange())
+    elif changeVal == "ctrl":
+        button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda: ctrlChange())
+    elif changeVal == "alt":
+        button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda: altChange())
     else:
         button = Button(row, text=other+"\n"+label, width=width, height=height, borderwidth=1,bg=bg, fg=fg, anchor=N, command=lambda: enter(val, capsVal, shiftVal, other))
     button.pack(side=LEFT)
@@ -157,15 +179,15 @@ def mainBoard():
     FSlashKey = createButton(row5, "/", other="?")
     shiftRKey = createButton(row5, "Shift", width=18, changeVal="shift")
     
-    CtrlLKey = createButton(row6, "Ctrl", width = 11)
+    CtrlLKey = createButton(row6, "Ctrl", width = 11, changeVal="ctrl")
 
     WinLKey = createButton(row6, "Win")
-    AltLKey = createButton(row6, "Alt")
+    AltLKey = createButton(row6, "Alt", changeVal="alt")
     SpaceKey = createButton(row6, " ", width=43)
     UnicodeKey = createButton(row6, "Unicode", width=9)
     WinRKey = createButton(row6, "Win")
     MenuKey = createButton(row6, "Menu")
-    CtrlRKey = createButton(row6, "Ctrl", width=11)
+    CtrlRKey = createButton(row6, "Ctrl", width=11, changeVal="ctrl")
 
     home.mainloop()
 
