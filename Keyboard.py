@@ -77,7 +77,6 @@ def uniChange(uniVal): # changes the value of uniPos and passes the character at
     else:
         uniPos = 0
 
-
 def createButton(row, val, capsVal="", shiftVal="", shiftLabel="", label="", changeVal="", uniVal="", width=3, height=4, border=2): # creates, packs and returns a tkinter button object
     if label == "":
         if capsVal!="":
