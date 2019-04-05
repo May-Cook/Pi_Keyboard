@@ -71,11 +71,12 @@ def altChange(): # changes the value of alt and passes the corresponding value i
 
 def uniChange(uniVal): # changes the value of uniPos and passes the character at corresponding itex of uniList into send()
     global uniList, uniPos
+    send(uniList[uniPos])
     if uniPos < len(uniList)-1:
         uniPos += 1
     else:
         uniPos = 0
-    send(uniList[uniPos])
+
 
 def createButton(row, val, capsVal="", shiftVal="", shiftLabel="", label="", changeVal="", uniVal="", width=3, height=4, border=2): # creates, packs and returns a tkinter button object
     if label == "":
