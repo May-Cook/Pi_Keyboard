@@ -90,7 +90,6 @@ def createButton(row, values, val, capsVal="", shiftVal="", shiftLabel="", label
     return button
 
 def qwertyBoard(values, currentProfileName): # creates a tkinter window object containing a keyboard interface with a qwerty layout
-    print("qwertyBoard: ", values, ", ", currentProfileName)
     height1 = 5
     width1 = 6
     width2 = 3
@@ -196,7 +195,6 @@ def qwertyBoard(values, currentProfileName): # creates a tkinter window object c
     home.mainloop()
 
 def dvorakBoard(values, currentProfileName): # creates a tkinter window object containing a keyboard interface with a dvorak layout
-    print("dvorakBoard: ", values, ", ", currentProfileName)
     height1 = 5
     width1 = 6
     width2 = 3
@@ -312,7 +310,6 @@ def dvorakBoard(values, currentProfileName): # creates a tkinter window object c
     home.mainloop()
 
 def colemakBoard(values, currentProfileName): # creates a tkinter window object containing a keyboard interface with a qwerty layout
-    print("qwertyBoard: ", values, ", ", currentProfileName)
     height1 = 5
     width1 = 6
     width2 = 3
