@@ -352,7 +352,7 @@ def colemakBoard(values, currentProfileName): # creates a tkinter window object 
     HashKey = createButton(row3, values, "#", shiftLabel="~", width=10)
 
 
-    BigBackKey = createButton(row4, values, "Back", label="⟵", shiftLabel="", width=10)
+    LeftBackKey = createButton(row4, values, "Back", label="⟵", shiftLabel="", width=10)
     AKey = createButton(row4, values, "a", capsVal="A")
     RKey = createButton(row4, values,"r", capsVal="R")
     SKey = createButton(row4, values, "s", capsVal="S")
