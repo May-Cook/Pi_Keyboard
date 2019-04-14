@@ -164,7 +164,6 @@ def qwertyBoard(values, currentProfileName): # creates a tkinter window object c
     ApostropheKey = createButton(row4, values, "'", shiftLabel="@")
     EnterKey = createButton(row4, values, "\n", "↵", width=14)
 
-
     ShiftLKey = createButton(row5, values, "Shift", width=8, changeVal="shift")
     BSlashKey = createButton(row5, values, "\\", shiftLabel="|")
     ZKey = createButton(row5, values, "z", capsVal="Z")
@@ -188,9 +187,6 @@ def qwertyBoard(values, currentProfileName): # creates a tkinter window object c
     WinRKey = createButton(row6, values, "Win", height=height6)
     MenuKey = createButton(row6, values, "Menu", height=height6)
     CtrlRKey = createButton(row6, values, "Ctrl", width=6, height=height6, changeVal="ctrl")
-    
-
-
 
     home.mainloop()
 
