@@ -278,19 +278,8 @@ def dvorakBoard(values, currentProfileName): # creates a tkinter window object c
     VKey = createButton(row5, values, "v", capsVal="V")
     ZKey = createButton(row5, values, "z", capsVal="Z")
     shiftRKey = createButton(row5, values, "Shift", width=20, changeVal="shift")
-
-
-
-
-
-
-
-
-
-
     
     CtrlLKey = createButton(row6, values, "Ctrl", width = 6, height=height6, changeVal="ctrl")
-
     WinLKey = createButton(row6, values, "Win", height=height6)
     AltLKey = createButton(row6, values, "Alt", height=height6, changeVal="alt")
     SpaceKey = createButton(row6, values, " ", label="____________", width=41, height=height6)
@@ -298,9 +287,6 @@ def dvorakBoard(values, currentProfileName): # creates a tkinter window object c
     WinRKey = createButton(row6, values, "Win", height=height6)
     MenuKey = createButton(row6, values, "Menu", height=height6)
     CtrlRKey = createButton(row6, values, "Ctrl", width=6, height=height6, changeVal="ctrl")
-    
-
-
 
     home.mainloop()
 
