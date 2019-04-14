@@ -265,7 +265,6 @@ def dvorakBoard(values, currentProfileName): # creates a tkinter window object c
     ApostropheKey = createButton(row4, values, "'", shiftLabel="@")
     EnterKey = createButton(row4, values, "\n", "↵", width=14)
 
-
     ShiftLKey = createButton(row5, values, "Shift", width=8, changeVal="shift")
     BSlashKey = createButton(row5, values, "\\", shiftLabel="|")
     SemiColonKey = createButton(row5, values, ";", shiftLabel=":")
