@@ -1,15 +1,14 @@
 from tkinter import *
 
 ### global variables: ###
-bg = "#4286f4"
-fg = "#000e26"
-uniList = ["☺", "≠️", "∬", "ↄ"]
-uniPos = 0
 caps = False
 shift = False
 ctrl = False
 alt = False
 #########################
+
+
+
 
 def send(val): # sends the value to the other device
     print(val)
@@ -41,7 +40,6 @@ def shiftChange(): # changes the value of shift and passes the corresponding val
     else:
         shift=True
         send("ShiftOn")
-
 def capsChange(): # changes the value of caps and passes the corresponding value into send()
     global caps
     if caps:
@@ -50,7 +48,6 @@ def capsChange(): # changes the value of caps and passes the corresponding value
     else:
         caps=True
         send("CapsOn")
-
 def ctrlChange(): # changes the value of ctrl and passes the corresponding value into send()
     global ctrl
     if ctrl:
@@ -59,7 +56,6 @@ def ctrlChange(): # changes the value of ctrl and passes the corresponding value
     else:
         ctrl=True
         send("CtrlOn")
-
 def altChange(): # changes the value of alt and passes the corresponding value into send()
     global alt
     if alt:
@@ -69,48 +65,43 @@ def altChange(): # changes the value of alt and passes the corresponding value i
         alt=True
         send("AltOn")
 
-def uniChange(uniVal): # changes the value of uniPos and passes the character at corresponding itex of uniList into send()
-    global uniList, uniPos
-    send(uniList[uniPos])
-    if uniPos < len(uniList)-1:
-        uniPos += 1
-    else:
-        uniPos = 0
 
-def createButton(row, val, capsVal="", shiftVal="", shiftLabel="", label="", changeVal="", uniVal="", width=3, height=4, border=2): # creates, packs and returns a tkinter button object
+def createButton(row, values, val, capsVal="", shiftVal="", shiftLabel="", label="", changeVal="", width=3, height=4, border=2): # creates, packs and returns a tkinter button object
     if label == "":
         if capsVal!="":
             label = capsVal
         else:
             label = val
     if changeVal == "caps":
-        button = Button(row, text=shiftLabel+"\n"+label, width=width, height=height, borderwidth=border,bg=bg, fg=fg, anchor=N, command=lambda: capsChange())
+        button = Button(row, text=shiftLabel+"\n"+label, width=width, height=height, borderwidth=border, bg=values[1], fg=values[2], activebackground = values[3], activeforeground = values[4], anchor=N, command=lambda: capsChange())
     elif changeVal == "shift":
-        button = Button(row, text=shiftLabel+"\n"+label, width=width, height=height, borderwidth=border,bg=bg, fg=fg, anchor=N, command=lambda: shiftChange())
+        button = Button(row, text=shiftLabel+"\n"+label, width=width, height=height, borderwidth=border, bg=values[1], fg=values[2], activebackground = values[3], activeforeground = values[4], anchor=N, command=lambda: shiftChange())
     elif changeVal == "ctrl":
-        button = Button(row, text=shiftLabel+"\n"+label, width=width, height=height, borderwidth=border,bg=bg, fg=fg, anchor=N, command=lambda: ctrlChange())
+        button = Button(row, text=shiftLabel+"\n"+label, width=width, height=height, borderwidth=border, bg=values[1], fg=values[2], activebackground = values[3], activeforeground = values[4], anchor=N, command=lambda: ctrlChange())
     elif changeVal == "alt":
-        button = Button(row, text=shiftLabel+"\n"+label, width=width, height=height, borderwidth=border,bg=bg, fg=fg, anchor=N, command=lambda: altChange())
-    elif uniVal != "":
-        button = Button(row, text=shiftLabel+"\n"+label, width=width, height=height, borderwidth=border,bg=bg, fg=fg, anchor=N, command=lambda: uniChange(uniVal))
+        button = Button(row, text=shiftLabel+"\n"+label, width=width, height=height, borderwidth=border, bg=values[1], fg=values[2], activebackground = values[3], activeforeground = values[4], anchor=N, command=lambda: altChange())
+    elif val == "Unicode":
+        button = Button(row, text=shiftLabel+"\n"+label, width=width, height=height, borderwidth=border, bg=values[1], fg=values[2], activebackground = values[3], activeforeground = values[4], anchor=N, command=lambda: send(values[5]))
     else:
-        button = Button(row, text=shiftLabel+"\n"+label, width=width, height=height, borderwidth=border,bg=bg, fg=fg, anchor=N, command=lambda: enter(val, capsVal, shiftVal, shiftLabel))
+        button = Button(row, text=shiftLabel+"\n"+label, width=width, height=height, borderwidth=border, bg=values[1], fg=values[2], activebackground = values[3], activeforeground = values[4], anchor=N, command=lambda: enter(val, capsVal, shiftVal, shiftLabel))
     button.pack(side=LEFT)
     return button
 
-def mainBoard(): # creates a tkinter window object containing the keyboard interface
-    global bg
+
+
+def qwertyBoard(values, currentProfileName):
+    print("qwertyBoard: ", values, ", ", currentProfileName)
     height1 = 5
     width1 = 6
     width2 = 3
     height6 = 7
     home = Tk()
-    home.title("keyboard")
+    home.title("Keyboard: " + currentProfileName)
     home.geometry("800x480")
-    home.resizable(False, False)
-    home.attributes("-fullscreen", True)
-    home["bg"]=bg
-    row1 = Frame(home, bg=bg)
+    # home.resizable(False, False)
+    # home.attributes("-fullscreen", True)
+    home["bg"]=values[1]
+    row1 = Frame(home, bg=values[1])
     row1.pack(side=TOP, anchor=W)
     row2 = Frame(home)
     row2.pack(side=TOP, anchor=W)
@@ -125,86 +116,431 @@ def mainBoard(): # creates a tkinter window object containing the keyboard inter
 
     macroFrame = Frame(row1)
     macroFrame.pack(fill=NONE, padx=244, pady=5, side=LEFT)
-    MuteKey = createButton(row1, "Mute", label="Mute", height=height1, width=width1)
-    PlayPauseKey = createButton(row1, "PlayPause", label="▶/⏯️", height=height1, width=width1)
-    VolDownKey = createButton(row1, "VolDown", label="⇩", height=height1, width=width1)
-    VolUpKey = createButton(row1, "VolUp", label="⇧", height=height1, width=width1)
+    MuteKey = createButton(row1, values, "Mute", label="Mute", height=height1, width=width1)
+    PlayPauseKey = createButton(row1, values, "PlayPause", label="▶/⏯️", height=height1, width=width1)
+    VolDownKey = createButton(row1, values, "VolDown", label="⇩", height=height1, width=width1)
+    VolUpKey = createButton(row1, values, "VolUp", label="⇧", height=height1, width=width1)
     
-    AccentKey = createButton(row2, "`", shiftLabel="¬", width=width2-1)
-    OneKey = createButton(row2, "1", shiftLabel="!", width=width2)
-    TwoKey = createButton(row2, "2", shiftLabel="\"", width=width2)
-    ThreeKey = createButton(row2, "3", shiftLabel="£", width=width2)
-    FourKey = createButton(row2, "4", shiftLabel="$", width=width2)
-    FiveKey = createButton(row2, "5", shiftLabel="%", width=width2)
-    SixKey = createButton(row2, "6", shiftLabel="^", width=width2)
-    SevenKey = createButton(row2, "7", shiftLabel="&", width=width2)
-    EightKey = createButton(row2, "8", shiftLabel="*", width=width2)
-    NineKey = createButton(row2, "9", shiftLabel="(", width=width2)
-    TenKey = createButton(row2, "0", shiftLabel=")", width=width2)
-    MinusKey = createButton(row2, "-", shiftLabel="_", width=width2)
-    EqualKey = createButton(row2, "=", shiftLabel="+", width=width2)
-    BackKey = createButton(row2, "Back", label="⟵", shiftLabel="", width=20)
+    AccentKey = createButton(row2, values, "`", shiftLabel="¬", width=width2-1)
+    OneKey = createButton(row2, values, "1", shiftLabel="!", width=width2)
+    TwoKey = createButton(row2, values, "2", shiftLabel="\"", width=width2)
+    ThreeKey = createButton(row2, values, "3", shiftLabel="£", width=width2)
+    FourKey = createButton(row2, values, "4", shiftLabel="$", width=width2)
+    FiveKey = createButton(row2, values, "5", shiftLabel="%", width=width2)
+    SixKey = createButton(row2, values, "6", shiftLabel="^", width=width2)
+    SevenKey = createButton(row2, values, "7", shiftLabel="&", width=width2)
+    EightKey = createButton(row2, values, "8", shiftLabel="*", width=width2)
+    NineKey = createButton(row2, values, "9", shiftLabel="(", width=width2)
+    TenKey = createButton(row2, values, "0", shiftLabel=")", width=width2)
+    MinusKey = createButton(row2, values, "-", shiftLabel="_", width=width2)
+    EqualKey = createButton(row2, values, "=", shiftLabel="+", width=width2)
+    BackKey = createButton(row2, values, "Back", label="⟵", shiftLabel="", width=20)
         
-    TabKey = createButton(row3, "Tab", width=8)
-    QKey = createButton(row3, "q", capsVal="Q")
-    WKey = createButton(row3, "w", capsVal="W")
-    EKey = createButton(row3, "e", capsVal="E")
-    RKey = createButton(row3, "r", capsVal="R")
-    TKey = createButton(row3, "t", capsVal="T")
-    YKey = createButton(row3, "y", capsVal="Y")
-    UKey = createButton(row3, "u", capsVal="U")
-    IKey = createButton(row3, "i", capsVal="I")
-    OKey = createButton(row3, "o", capsVal="O")
-    PKey = createButton(row3, "p", capsVal="P")
-    SqBrOKey = createButton(row3, "[", shiftLabel="{")
-    SqBrCKey = createButton(row3, "]", shiftLabel="}")
-    HashKey = createButton(row3, "#", shiftLabel="~", width=10)
+    TabKey = createButton(row3, values, "Tab", width=8)
+    QKey = createButton(row3, values, "q", capsVal="Q")
+    WKey = createButton(row3, values, "w", capsVal="W")
+    EKey = createButton(row3, values,"e", capsVal="E")
+    RKey = createButton(row3, values,"r", capsVal="R")
+    TKey = createButton(row3, values,"t", capsVal="T")
+    YKey = createButton(row3, values, "y", capsVal="Y")
+    UKey = createButton(row3, values, "u", capsVal="U")
+    IKey = createButton(row3, values, "i", capsVal="I")
+    OKey = createButton(row3, values, "o", capsVal="O")
+    PKey = createButton(row3, values, "p", capsVal="P")
+    SqBrOKey = createButton(row3, values, "[", shiftLabel="{")
+    SqBrCKey = createButton(row3, values, "]", shiftLabel="}")
+    HashKey = createButton(row3, values, "#", shiftLabel="~", width=10)
     
-    CapsKey = createButton(row4, "Caps Lock", width=10, changeVal="caps")
-    AKey = createButton(row4, "a", capsVal="A")
-    SKey = createButton(row4, "s", capsVal="S")
-    DKey = createButton(row4, "d", capsVal="D")
-    FKey = createButton(row4, "f", capsVal="F")
-    GKey = createButton(row4, "g", capsVal="G")
-    HKey = createButton(row4, "h", capsVal="H")
-    JKey = createButton(row4, "j", capsVal="J")
-    KKey = createButton(row4, "k", capsVal="K")
-    LKey = createButton(row4, "l", capsVal="L")
-    SemiColonKey = createButton(row4, ";", shiftLabel=":")
-    ApostropheKey = createButton(row4, "'", shiftLabel="@")
-    EnterKey = createButton(row4,"\n", "↵", width=14)
+    CapsKey = createButton(row4, values, "Caps Lock", width=10, changeVal="caps")
+    AKey = createButton(row4, values, "a", capsVal="A")
+    SKey = createButton(row4, values, "s", capsVal="S")
+    DKey = createButton(row4, values, "d", capsVal="D")
+    FKey = createButton(row4, values, "f", capsVal="F")
+    GKey = createButton(row4, values, "g", capsVal="G")
+    HKey = createButton(row4, values, "h", capsVal="H")
+    JKey = createButton(row4, values, "j", capsVal="J")
+    KKey = createButton(row4, values, "k", capsVal="K")
+    LKey = createButton(row4, values, "l", capsVal="L")
+    SemiColonKey = createButton(row4, values, ";", shiftLabel=":")
+    ApostropheKey = createButton(row4, values, "'", shiftLabel="@")
+    EnterKey = createButton(row4, values, "\n", "↵", width=14)
 
 
-    ShiftLKey = createButton(row5, "Shift", width=8, changeVal="shift")
-    BSlashKey = createButton(row5, "\\", shiftLabel="|")
-    ZKey = createButton(row5, "z", capsVal="Z")
-    XKey = createButton(row5, "x", capsVal="X")
-    CKey = createButton(row5, "c", capsVal="C")
-    VKey = createButton(row5, "v", capsVal="V")
-    BKey = createButton(row5, "b", capsVal="B")
-    NKey = createButton(row5, "n", capsVal="N")
-    MKey = createButton(row5, "m", capsVal="M")
-    CommaKey = createButton(row5, ",", shiftLabel="<")
-    StopKey = createButton(row5, ".", shiftLabel=">")
-    FSlashKey = createButton(row5, "/", shiftLabel="?")
-    shiftRKey = createButton(row5, "Shift", width=20, changeVal="shift")
+    ShiftLKey = createButton(row5, values, "Shift", width=8, changeVal="shift")
+    BSlashKey = createButton(row5, values, "\\", shiftLabel="|")
+    ZKey = createButton(row5, values, "z", capsVal="Z")
+    XKey = createButton(row5, values, "x", capsVal="X")
+    CKey = createButton(row5, values, "c", capsVal="C")
+    VKey = createButton(row5, values, "v", capsVal="V")
+    BKey = createButton(row5, values, "b", capsVal="B")
+    NKey = createButton(row5, values, "n", capsVal="N")
+    MKey = createButton(row5, values, "m", capsVal="M")
+    CommaKey = createButton(row5, values, ",", shiftLabel="<")
+    StopKey = createButton(row5, values, ".", shiftLabel=">")
+    FSlashKey = createButton(row5, values, "/", shiftLabel="?")
+    shiftRKey = createButton(row5, values, "Shift", width=20, changeVal="shift")
     
-    CtrlLKey = createButton(row6, "Ctrl", width = 6, height=height6, changeVal="ctrl")
+    CtrlLKey = createButton(row6, values, "Ctrl", width = 6, height=height6, changeVal="ctrl")
 
-    WinLKey = createButton(row6, "Win", height=height6)
-    AltLKey = createButton(row6, "Alt", height=height6, changeVal="alt")
-    SpaceKey = createButton(row6, " ", label="____________", width=41, height=height6)
-    UnicodeKey = createButton(row6, "Unicode", width=5, height=height6, uniVal=0)
-    WinRKey = createButton(row6, "Win", height=height6)
-    MenuKey = createButton(row6, "Menu", height=height6)
-    CtrlRKey = createButton(row6, "Ctrl", width=6, height=height6, changeVal="ctrl")
+    WinLKey = createButton(row6, values, "Win", height=height6)
+    AltLKey = createButton(row6, values, "Alt", height=height6, changeVal="alt")
+    SpaceKey = createButton(row6, values, " ", label="____________", width=41, height=height6)
+    UnicodeKey = createButton(row6, values, "Unicode", width=5, height=height6)
+    WinRKey = createButton(row6, values, "Win", height=height6)
+    MenuKey = createButton(row6, values, "Menu", height=height6)
+    CtrlRKey = createButton(row6, values, "Ctrl", width=6, height=height6, changeVal="ctrl")
     
 
 
 
     home.mainloop()
 
-mainBoard()
+def dvorakBoard(values, currentProfileName):
+    print("dvorakBoard: ", values, ", ", currentProfileName)
+    height1 = 5
+    width1 = 6
+    width2 = 3
+    height6 = 7
+    home = Tk()
+    home.title("Keyboard: " + currentProfileName)
+    home.geometry("800x480")
+    # home.resizable(False, False)
+    # home.attributes("-fullscreen", True)
+    home["bg"]=values[1]
+    row1 = Frame(home, bg=values[1])
+    row1.pack(side=TOP, anchor=W)
+    row2 = Frame(home)
+    row2.pack(side=TOP, anchor=W)
+    row3 = Frame(home)
+    row3.pack(side=TOP, anchor=W)
+    row4 = Frame(home)
+    row4.pack(side=TOP, anchor=W)
+    row5 = Frame(home)
+    row5.pack(side=TOP, anchor=W)
+    row6 = Frame(home)
+    row6.pack(side=TOP, anchor=W)
+
+    macroFrame = Frame(row1)
+    macroFrame.pack(fill=NONE, padx=244, pady=5, side=LEFT)
+    MuteKey = createButton(row1, values, "Mute", label="Mute", height=height1, width=width1)
+    PlayPauseKey = createButton(row1, values, "PlayPause", label="▶/⏯️", height=height1, width=width1)
+    VolDownKey = createButton(row1, values, "VolDown", label="⇩", height=height1, width=width1)
+    VolUpKey = createButton(row1, values, "VolUp", label="⇧", height=height1, width=width1)
+    
+    AccentKey = createButton(row2, values, "`", shiftLabel="¬", width=width2-1)
+    OneKey = createButton(row2, values, "1", shiftLabel="!", width=width2)
+    TwoKey = createButton(row2, values, "2", shiftLabel="\"", width=width2)
+    ThreeKey = createButton(row2, values, "3", shiftLabel="£", width=width2)
+    FourKey = createButton(row2, values, "4", shiftLabel="$", width=width2)
+    FiveKey = createButton(row2, values, "5", shiftLabel="%", width=width2)
+    SixKey = createButton(row2, values, "6", shiftLabel="^", width=width2)
+    SevenKey = createButton(row2, values, "7", shiftLabel="&", width=width2)
+    EightKey = createButton(row2, values, "8", shiftLabel="*", width=width2)
+    NineKey = createButton(row2, values, "9", shiftLabel="(", width=width2)
+    TenKey = createButton(row2, values, "0", shiftLabel=")", width=width2)
+    MinusKey = createButton(row2, values, "-", shiftLabel="_", width=width2)
+    EqualKey = createButton(row2, values, "=", shiftLabel="+", width=width2)
+    BackKey = createButton(row2, values, "Back", label="⟵", shiftLabel="", width=20)
+        
+    TabKey = createButton(row3, values, "Tab", width=8)
+    QKey = createButton(row3, values, "q", capsVal="Q")
+    WKey = createButton(row3, values, "w", capsVal="W")
+    EKey = createButton(row3, values,"e", capsVal="E")
+    RKey = createButton(row3, values,"r", capsVal="R")
+    TKey = createButton(row3, values,"t", capsVal="T")
+    YKey = createButton(row3, values, "y", capsVal="Y")
+    UKey = createButton(row3, values, "u", capsVal="U")
+    IKey = createButton(row3, values, "i", capsVal="I")
+    OKey = createButton(row3, values, "o", capsVal="O")
+    PKey = createButton(row3, values, "p", capsVal="P")
+    SqBrOKey = createButton(row3, values, "[", shiftLabel="{")
+    SqBrCKey = createButton(row3, values, "]", shiftLabel="}")
+    HashKey = createButton(row3, values, "#", shiftLabel="~", width=10)
+    
+    CapsKey = createButton(row4, values, "Caps Lock", width=10, changeVal="caps")
+    AKey = createButton(row4, values, "a", capsVal="A")
+    SKey = createButton(row4, values, "s", capsVal="S")
+    DKey = createButton(row4, values, "d", capsVal="D")
+    FKey = createButton(row4, values, "f", capsVal="F")
+    GKey = createButton(row4, values, "g", capsVal="G")
+    HKey = createButton(row4, values, "h", capsVal="H")
+    JKey = createButton(row4, values, "j", capsVal="J")
+    KKey = createButton(row4, values, "k", capsVal="K")
+    LKey = createButton(row4, values, "l", capsVal="L")
+    SemiColonKey = createButton(row4, values, ";", shiftLabel=":")
+    ApostropheKey = createButton(row4, values, "'", shiftLabel="@")
+    EnterKey = createButton(row4, values, "\n", "↵", width=14)
+
+
+    ShiftLKey = createButton(row5, values, "Shift", width=8, changeVal="shift")
+    BSlashKey = createButton(row5, values, "\\", shiftLabel="|")
+    ZKey = createButton(row5, values, "z", capsVal="Z")
+    XKey = createButton(row5, values, "x", capsVal="X")
+    CKey = createButton(row5, values, "c", capsVal="C")
+    VKey = createButton(row5, values, "v", capsVal="V")
+    BKey = createButton(row5, values, "b", capsVal="B")
+    NKey = createButton(row5, values, "n", capsVal="N")
+    MKey = createButton(row5, values, "m", capsVal="M")
+    CommaKey = createButton(row5, values, ",", shiftLabel="<")
+    StopKey = createButton(row5, values, ".", shiftLabel=">")
+    FSlashKey = createButton(row5, values, "/", shiftLabel="?")
+    shiftRKey = createButton(row5, values, "Shift", width=20, changeVal="shift")
+    
+    CtrlLKey = createButton(row6, values, "Ctrl", width = 6, height=height6, changeVal="ctrl")
+
+    WinLKey = createButton(row6, values, "Win", height=height6)
+    AltLKey = createButton(row6, values, "Alt", height=height6, changeVal="alt")
+    SpaceKey = createButton(row6, values, " ", label="____________", width=41, height=height6)
+    UnicodeKey = createButton(row6, values, "Unicode", width=5, height=height6)
+    WinRKey = createButton(row6, values, "Win", height=height6)
+    MenuKey = createButton(row6, values, "Menu", height=height6)
+    CtrlRKey = createButton(row6, values, "Ctrl", width=6, height=height6, changeVal="ctrl")
+    
 
 
 
+    home.mainloop()
+
+def colemakBoard(values, currentProfileName):
+    print("qwertyBoard: ", values, ", ", currentProfileName)
+    height1 = 5
+    width1 = 6
+    width2 = 3
+    height6 = 7
+    home = Tk()
+    home.title("Keyboard: " + currentProfileName)
+    home.geometry("800x480")
+    # home.resizable(False, False)
+    # home.attributes("-fullscreen", True)
+    home["bg"]=values[1]
+    row1 = Frame(home, bg=values[1])
+    row1.pack(side=TOP, anchor=W)
+    row2 = Frame(home)
+    row2.pack(side=TOP, anchor=W)
+    row3 = Frame(home)
+    row3.pack(side=TOP, anchor=W)
+    row4 = Frame(home)
+    row4.pack(side=TOP, anchor=W)
+    row5 = Frame(home)
+    row5.pack(side=TOP, anchor=W)
+    row6 = Frame(home)
+    row6.pack(side=TOP, anchor=W)
+
+    macroFrame = Frame(row1)
+    macroFrame.pack(fill=NONE, padx=244, pady=5, side=LEFT)
+    MuteKey = createButton(row1, values, "Mute", label="Mute", height=height1, width=width1)
+    PlayPauseKey = createButton(row1, values, "PlayPause", label="▶/⏯️", height=height1, width=width1)
+    VolDownKey = createButton(row1, values, "VolDown", label="⇩", height=height1, width=width1)
+    VolUpKey = createButton(row1, values, "VolUp", label="⇧", height=height1, width=width1)
+    
+    AccentKey = createButton(row2, values, "`", shiftLabel="¬", width=width2-1)
+    OneKey = createButton(row2, values, "1", shiftLabel="!", width=width2)
+    TwoKey = createButton(row2, values, "2", shiftLabel="\"", width=width2)
+    ThreeKey = createButton(row2, values, "3", shiftLabel="£", width=width2)
+    FourKey = createButton(row2, values, "4", shiftLabel="$", width=width2)
+    FiveKey = createButton(row2, values, "5", shiftLabel="%", width=width2)
+    SixKey = createButton(row2, values, "6", shiftLabel="^", width=width2)
+    SevenKey = createButton(row2, values, "7", shiftLabel="&", width=width2)
+    EightKey = createButton(row2, values, "8", shiftLabel="*", width=width2)
+    NineKey = createButton(row2, values, "9", shiftLabel="(", width=width2)
+    TenKey = createButton(row2, values, "0", shiftLabel=")", width=width2)
+    MinusKey = createButton(row2, values, "-", shiftLabel="_", width=width2)
+    EqualKey = createButton(row2, values, "=", shiftLabel="+", width=width2)
+    BackKey = createButton(row2, values, "Back", label="⟵", shiftLabel="", width=20)
+        
+    TabKey = createButton(row3, values, "Tab", width=8)
+    QKey = createButton(row3, values, "q", capsVal="Q")
+    WKey = createButton(row3, values, "w", capsVal="W")
+    EKey = createButton(row3, values,"e", capsVal="E")
+    RKey = createButton(row3, values,"r", capsVal="R")
+    TKey = createButton(row3, values,"t", capsVal="T")
+    YKey = createButton(row3, values, "y", capsVal="Y")
+    UKey = createButton(row3, values, "u", capsVal="U")
+    IKey = createButton(row3, values, "i", capsVal="I")
+    OKey = createButton(row3, values, "o", capsVal="O")
+    PKey = createButton(row3, values, "p", capsVal="P")
+    SqBrOKey = createButton(row3, values, "[", shiftLabel="{")
+    SqBrCKey = createButton(row3, values, "]", shiftLabel="}")
+    HashKey = createButton(row3, values, "#", shiftLabel="~", width=10)
+    
+    CapsKey = createButton(row4, values, "Caps Lock", width=10, changeVal="caps")
+    AKey = createButton(row4, values, "a", capsVal="A")
+    SKey = createButton(row4, values, "s", capsVal="S")
+    DKey = createButton(row4, values, "d", capsVal="D")
+    FKey = createButton(row4, values, "f", capsVal="F")
+    GKey = createButton(row4, values, "g", capsVal="G")
+    HKey = createButton(row4, values, "h", capsVal="H")
+    JKey = createButton(row4, values, "j", capsVal="J")
+    KKey = createButton(row4, values, "k", capsVal="K")
+    LKey = createButton(row4, values, "l", capsVal="L")
+    SemiColonKey = createButton(row4, values, ";", shiftLabel=":")
+    ApostropheKey = createButton(row4, values, "'", shiftLabel="@")
+    EnterKey = createButton(row4, values, "\n", "↵", width=14)
+
+
+    ShiftLKey = createButton(row5, values, "Shift", width=8, changeVal="shift")
+    BSlashKey = createButton(row5, values, "\\", shiftLabel="|")
+    ZKey = createButton(row5, values, "z", capsVal="Z")
+    XKey = createButton(row5, values, "x", capsVal="X")
+    CKey = createButton(row5, values, "c", capsVal="C")
+    VKey = createButton(row5, values, "v", capsVal="V")
+    BKey = createButton(row5, values, "b", capsVal="B")
+    NKey = createButton(row5, values, "n", capsVal="N")
+    MKey = createButton(row5, values, "m", capsVal="M")
+    CommaKey = createButton(row5, values, ",", shiftLabel="<")
+    StopKey = createButton(row5, values, ".", shiftLabel=">")
+    FSlashKey = createButton(row5, values, "/", shiftLabel="?")
+    shiftRKey = createButton(row5, values, "Shift", width=20, changeVal="shift")
+    
+    CtrlLKey = createButton(row6, values, "Ctrl", width = 6, height=height6, changeVal="ctrl")
+
+    WinLKey = createButton(row6, values, "Win", height=height6)
+    AltLKey = createButton(row6, values, "Alt", height=height6, changeVal="alt")
+    SpaceKey = createButton(row6, values, " ", label="____________", width=41, height=height6)
+    UnicodeKey = createButton(row6, values, "Unicode", width=5, height=height6)
+    WinRKey = createButton(row6, values, "Win", height=height6)
+    MenuKey = createButton(row6, values, "Menu", height=height6)
+    CtrlRKey = createButton(row6, values, "Ctrl", width=6, height=height6, changeVal="ctrl")
+    
+
+
+
+    home.mainloop()
+
+
+Profiles = open("Saves/Profiles.txt", "r")
+currentProfileName = Profiles.readline()
+currentProfileName = currentProfileName.replace("\n", "")
+print(currentProfileName)
+currentProfile = open("Saves/"+ currentProfileName +".txt")
+values = currentProfile.readlines()
+print(values)
+for i in range (0, len(values)):
+    values[i] = values[i].replace("\n", "")
+print(values)
+
+if values[0] == "dvorak":
+    dvorakBoard(values, currentProfileName)
+elif values[0] == "colemak":
+    colemakBoard(values, currentProfileName)
+else:
+    qwertyBoard(values, currentProfileName)
+
+
+# for profile in range(len(CurrentProfileName)-1) :
+#     CurrentProfile[profile] = CurrentProfile
+#     print(CurrentProfile)
+
+# CurrentProfile = open("Saves/" + CurrentProfileName + ".txt", "r")
+# Values = CurrentProfile.readLines()
+# print(Values)
+
+# mainBoard()
+
+
+
+# def mainBoard(): # creates a tkinter window object containing the keyboard interface
+#     global bg
+#     height1 = 5
+#     width1 = 6
+#     width2 = 3
+#     height6 = 7
+#     home = Tk()
+#     home.title("keyboard")
+#     home.geometry("800x480")
+#     home.resizable(False, False)
+#     home.attributes("-fullscreen", True)
+#     home["bg"]=bg
+#     row1 = Frame(home, bg=bg)
+#     row1.pack(side=TOP, anchor=W)
+#     row2 = Frame(home)
+#     row2.pack(side=TOP, anchor=W)
+#     row3 = Frame(home)
+#     row3.pack(side=TOP, anchor=W)
+#     row4 = Frame(home)
+#     row4.pack(side=TOP, anchor=W)
+#     row5 = Frame(home)
+#     row5.pack(side=TOP, anchor=W)
+#     row6 = Frame(home)
+#     row6.pack(side=TOP, anchor=W)
+
+#     macroFrame = Frame(row1)
+#     macroFrame.pack(fill=NONE, padx=244, pady=5, side=LEFT)
+#     MuteKey = createButton(row1, "Mute", label="Mute", height=height1, width=width1)
+#     PlayPauseKey = createButton(row1, "PlayPause", label="▶/⏯️", height=height1, width=width1)
+#     VolDownKey = createButton(row1, "VolDown", label="⇩", height=height1, width=width1)
+#     VolUpKey = createButton(row1, "VolUp", label="⇧", height=height1, width=width1)
+    
+#     AccentKey = createButton(row2, "`", shiftLabel="¬", width=width2-1)
+#     OneKey = createButton(row2, "1", shiftLabel="!", width=width2)
+#     TwoKey = createButton(row2, "2", shiftLabel="\"", width=width2)
+#     ThreeKey = createButton(row2, "3", shiftLabel="£", width=width2)
+#     FourKey = createButton(row2, "4", shiftLabel="$", width=width2)
+#     FiveKey = createButton(row2, "5", shiftLabel="%", width=width2)
+#     SixKey = createButton(row2, "6", shiftLabel="^", width=width2)
+#     SevenKey = createButton(row2, "7", shiftLabel="&", width=width2)
+#     EightKey = createButton(row2, "8", shiftLabel="*", width=width2)
+#     NineKey = createButton(row2, "9", shiftLabel="(", width=width2)
+#     TenKey = createButton(row2, "0", shiftLabel=")", width=width2)
+#     MinusKey = createButton(row2, "-", shiftLabel="_", width=width2)
+#     EqualKey = createButton(row2, "=", shiftLabel="+", width=width2)
+#     BackKey = createButton(row2, "Back", label="⟵", shiftLabel="", width=20)
+        
+#     TabKey = createButton(row3, "Tab", width=8)
+#     QKey = createButton(row3, "q", capsVal="Q")
+#     WKey = createButton(row3, "w", capsVal="W")
+#     EKey = createButton(row3, "e", capsVal="E")
+#     RKey = createButton(row3, "r", capsVal="R")
+#     TKey = createButton(row3, "t", capsVal="T")
+#     YKey = createButton(row3, "y", capsVal="Y")
+#     UKey = createButton(row3, "u", capsVal="U")
+#     IKey = createButton(row3, "i", capsVal="I")
+#     OKey = createButton(row3, "o", capsVal="O")
+#     PKey = createButton(row3, "p", capsVal="P")
+#     SqBrOKey = createButton(row3, "[", shiftLabel="{")
+#     SqBrCKey = createButton(row3, "]", shiftLabel="}")
+#     HashKey = createButton(row3, "#", shiftLabel="~", width=10)
+    
+#     CapsKey = createButton(row4, "Caps Lock", width=10, changeVal="caps")
+#     AKey = createButton(row4, "a", capsVal="A")
+#     SKey = createButton(row4, "s", capsVal="S")
+#     DKey = createButton(row4, "d", capsVal="D")
+#     FKey = createButton(row4, "f", capsVal="F")
+#     GKey = createButton(row4, "g", capsVal="G")
+#     HKey = createButton(row4, "h", capsVal="H")
+#     JKey = createButton(row4, "j", capsVal="J")
+#     KKey = createButton(row4, "k", capsVal="K")
+#     LKey = createButton(row4, "l", capsVal="L")
+#     SemiColonKey = createButton(row4, ";", shiftLabel=":")
+#     ApostropheKey = createButton(row4, "'", shiftLabel="@")
+#     EnterKey = createButton(row4,"\n", "↵", width=14)
+
+
+#     ShiftLKey = createButton(row5, "Shift", width=8, changeVal="shift")
+#     BSlashKey = createButton(row5, "\\", shiftLabel="|")
+#     ZKey = createButton(row5, "z", capsVal="Z")
+#     XKey = createButton(row5, "x", capsVal="X")
+#     CKey = createButton(row5, "c", capsVal="C")
+#     VKey = createButton(row5, "v", capsVal="V")
+#     BKey = createButton(row5, "b", capsVal="B")
+#     NKey = createButton(row5, "n", capsVal="N")
+#     MKey = createButton(row5, "m", capsVal="M")
+#     CommaKey = createButton(row5, ",", shiftLabel="<")
+#     StopKey = createButton(row5, ".", shiftLabel=">")
+#     FSlashKey = createButton(row5, "/", shiftLabel="?")
+#     shiftRKey = createButton(row5, "Shift", width=20, changeVal="shift")
+    
+#     CtrlLKey = createButton(row6, "Ctrl", width = 6, height=height6, changeVal="ctrl")
+
+#     WinLKey = createButton(row6, "Win", height=height6)
+#     AltLKey = createButton(row6, "Alt", height=height6, changeVal="alt")
+#     SpaceKey = createButton(row6, " ", label="____________", width=41, height=height6)
+#     UnicodeKey = createButton(row6, "Unicode", width=5, height=height6, uniVal=0)
+#     WinRKey = createButton(row6, "Win", height=height6)
+#     MenuKey = createButton(row6, "Menu", height=height6)
+#     CtrlRKey = createButton(row6, "Ctrl", width=6, height=height6, changeVal="ctrl")
+    
+
+
+
+#     home.mainloop()
