@@ -1,6 +1,6 @@
-qwerty
+﻿qwerty
 #158c8a
-#00a0ff
+#000000
 #6d0f0f
 #ffffff
-??
+☺

@@ -423,11 +423,17 @@ Profiles = open("Saves/Profiles.txt", "r")
 currentProfileName = Profiles.readline()
 currentProfileName = currentProfileName.replace("\n", "")
 print(currentProfileName)
-currentProfile = open("Saves/"+ currentProfileName +".txt")
+currentProfile = open("Saves/"+ currentProfileName +".txt", "rb")
 values = currentProfile.readlines()
 print(values)
+
+print(values)
 for i in range (0, len(values)):
-    values[i] = values[i].replace("\n", "")
+    newVal = values[i]
+    newVal = newVal.decode("utf-8")
+    newVal = newVal.replace("\n", "")
+    newVal = newVal.replace("\r","")
+    values[i] = newVal
 print(values)
 
 if values[0] == "dvorak":
