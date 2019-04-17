@@ -40,6 +40,7 @@ def shiftChange(): # changes the value of shift and passes the corresponding val
     else:
         shift=True
         send("ShiftOn")
+
 def capsChange(): # changes the value of caps and passes the corresponding value into send()
     global caps
     if caps:
@@ -48,6 +49,7 @@ def capsChange(): # changes the value of caps and passes the corresponding value
     else:
         caps=True
         send("CapsOn")
+
 def ctrlChange(): # changes the value of ctrl and passes the corresponding value into send()
     global ctrl
     if ctrl:
@@ -56,6 +58,7 @@ def ctrlChange(): # changes the value of ctrl and passes the corresponding value
     else:
         ctrl=True
         send("CtrlOn")
+
 def altChange(): # changes the value of alt and passes the corresponding value into send()
     global alt
     if alt:
@@ -86,7 +89,7 @@ def createButton(row, values, val, capsVal="", shiftVal="", shiftLabel="", label
     button.pack(side=LEFT)
     return button
 
-def qwertyBoard(values, currentProfileName):
+def qwertyBoard(values, currentProfileName): # creates a tkinter window object containing a keyboard interface with a qwerty layout
     print("qwertyBoard: ", values, ", ", currentProfileName)
     height1 = 5
     width1 = 6
@@ -192,7 +195,7 @@ def qwertyBoard(values, currentProfileName):
 
     home.mainloop()
 
-def dvorakBoard(values, currentProfileName):
+def dvorakBoard(values, currentProfileName): # creates a tkinter window object containing a keyboard interface with a dvorak layout
     print("dvorakBoard: ", values, ", ", currentProfileName)
     height1 = 5
     width1 = 6
@@ -308,7 +311,7 @@ def dvorakBoard(values, currentProfileName):
 
     home.mainloop()
 
-def colemakBoard(values, currentProfileName):
+def colemakBoard(values, currentProfileName): # creates a tkinter window object containing a keyboard interface with a qwerty layout
     print("qwertyBoard: ", values, ", ", currentProfileName)
     height1 = 5
     width1 = 6
@@ -433,9 +436,9 @@ for i in range (0, len(values)):
     values[i] = newVal
 print(values)
 
-if values[0] == "dvorak":
+if "dvorak" in values[0]:
     dvorakBoard(values, currentProfileName)
-elif values[0] == "colemak":
+elif "colemak" in values[0]:
     colemakBoard(values, currentProfileName)
 else:
     qwertyBoard(values, currentProfileName)
