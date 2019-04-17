@@ -98,8 +98,8 @@ def qwertyBoard(values, currentProfileName): # creates a tkinter window object c
     home = Tk()
     home.title("Keyboard: " + currentProfileName)
     home.geometry("800x480")
-    # home.resizable(False, False)
-    # home.attributes("-fullscreen", True)
+    home.resizable(False, False)
+    home.attributes("-fullscreen", True)
     home["bg"]=values[1]
     row1 = Frame(home, bg=values[1])
     row1.pack(side=TOP, anchor=W)
@@ -204,8 +204,8 @@ def dvorakBoard(values, currentProfileName): # creates a tkinter window object c
     home = Tk()
     home.title("Keyboard: " + currentProfileName)
     home.geometry("800x480")
-    # home.resizable(False, False)
-    # home.attributes("-fullscreen", True)
+    home.resizable(False, False)
+    home.attributes("-fullscreen", True)
     home["bg"]=values[1]
     row1 = Frame(home, bg=values[1])
     row1.pack(side=TOP, anchor=W)
@@ -320,8 +320,8 @@ def colemakBoard(values, currentProfileName): # creates a tkinter window object 
     home = Tk()
     home.title("Keyboard: " + currentProfileName)
     home.geometry("800x480")
-    # home.resizable(False, False)
-    # home.attributes("-fullscreen", True)
+    home.resizable(False, False)
+    home.attributes("-fullscreen", True)
     home["bg"]=values[1]
     row1 = Frame(home, bg=values[1])
     row1.pack(side=TOP, anchor=W)
