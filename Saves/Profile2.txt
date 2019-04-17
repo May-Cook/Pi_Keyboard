@@ -1,5 +1,5 @@
 ﻿dvorak
-#158c8a
+#4e42f4
 #000000
 #033d0b
 #ffffff
