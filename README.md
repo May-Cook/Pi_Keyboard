@@ -11,7 +11,7 @@ the project was written in python and uses `tkinter` to create the UI
 the project was meant to allow the user to create and store profiles, and this functionality is implemented... badly
 the profiles are stored in text files, named `Profile1.txt`, `Profile2.txt` and so on. each profile contains:
 * the keyboard layout 
-* * qwerty, colemak or dvorak
+ * qwerty, colemak or dvorak
 * the background colour, as a hexcode
 * the foreground colour, as a hexcode
 * the active background colour, as a hexcode
