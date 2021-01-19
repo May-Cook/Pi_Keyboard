@@ -5,6 +5,7 @@ caps = False
 shift = False
 ctrl = False
 alt = False
+fullScreen = False # change to true to make the window fullscreen (not recommended)
 #########################
 
 
@@ -98,7 +99,7 @@ def qwertyBoard(values, currentProfileName): # creates a tkinter window object c
     home.title("Keyboard: " + currentProfileName)
     home.geometry("800x480")
     home.resizable(False, False)
-    home.attributes("-fullscreen", True)
+    home.attributes("-fullscreen", fullScreen)
     home["bg"]=values[1]
     row1 = Frame(home, bg=values[1])
     row1.pack(side=TOP, anchor=W)
@@ -199,7 +200,7 @@ def dvorakBoard(values, currentProfileName): # creates a tkinter window object c
     home.title("Keyboard: " + currentProfileName)
     home.geometry("800x480")
     home.resizable(False, False)
-    home.attributes("-fullscreen", True)
+    home.attributes("-fullscreen", fullScreen)
     home["bg"]=values[1]
     row1 = Frame(home, bg=values[1])
     row1.pack(side=TOP, anchor=W)
@@ -299,7 +300,7 @@ def colemakBoard(values, currentProfileName): # creates a tkinter window object 
     home.title("Keyboard: " + currentProfileName)
     home.geometry("800x480")
     home.resizable(False, False)
-    home.attributes("-fullscreen", True)
+    home.attributes("-fullscreen", fullScreen)
     home["bg"]=values[1]
     row1 = Frame(home, bg=values[1])
     row1.pack(side=TOP, anchor=W)
