@@ -16,7 +16,7 @@ The keyboard currently just prints the corresponding character to the terminal w
 
 ### Profiles
 
-The project was meant to allow the user to create and store profiles, and this functionality is implemented... *badly*
+The project was meant to allow the user to create and store profiles and this functionality is implemented... *badly*
 
 The profiles are stored in text files, named `Profile1.txt`, `Profile2.txt` and so on. each profile contains:
 
@@ -30,4 +30,4 @@ The currently selected profile, followed by a list of all profiles, including th
 
 ### Making it fullscreen - *not recommended*
 
-The project was initially intended to run on the touchscreen of a specific raspberry pi, the UI is therefore designed for a window of a specific size, when the project was initially created, the keyboard ran in fullscreen but when running the program on a different machine it best to run it as a window. I have therefore changed the interface to run in a window of the correct size, if you really want to run it in fullscreen, you can change the global variable `fullScreen` to true **I do not recommend this**
+The project was initially intended to run on the touchscreen of a specific raspberry pi, the UI is therefore designed for a window of a specific size, when the project was initially created, the keyboard ran in fullscreen but when running the program on a different machine it best to run it as a window. I have therefore changed the interface to run in a window of the correct size, if you really want to run it in fullscreen, you can change the global variable `fullScreen` to `True` **I do not recommend this**
