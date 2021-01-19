@@ -17,6 +17,7 @@ The keyboard currently just prints the corresponding character to the terminal w
 ### Profiles
 
 The project was meant to allow the user to create and store profiles, and this functionality is implemented... badly
+
 The profiles are stored in text files, named `Profile1.txt`, `Profile2.txt` and so on. each profile contains:
 
 * The keyboard layout (`qwerty`, `colemak` or `dvorak`)
