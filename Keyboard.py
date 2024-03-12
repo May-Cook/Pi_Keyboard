@@ -8,9 +8,6 @@ alt = False
 fullScreen = False # change to true to make the window fullscreen (not recommended)
 #########################
 
-
-
-
 def send(val): # sends the value to the other device
     print(val)
 
@@ -352,7 +349,6 @@ def colemakBoard(values, currentProfileName): # creates a tkinter window object 
     SqBrCKey = createButton(row3, values, "]", shiftLabel="}")
     HashKey = createButton(row3, values, "#", shiftLabel="~", width=10)
 
-
     LeftBackKey = createButton(row4, values, "Back", label="⟵", shiftLabel="", width=10)
     AKey = createButton(row4, values, "a", capsVal="A")
     RKey = createButton(row4, values,"r", capsVal="R")
@@ -381,8 +377,6 @@ def colemakBoard(values, currentProfileName): # creates a tkinter window object 
     FSlashKey = createButton(row5, values, "/", shiftLabel="?")
     shiftRKey = createButton(row5, values, "Shift", width=20, changeVal="shift")
     
-
-
     CtrlLKey = createButton(row6, values, "Ctrl", width = 6, height=height6, changeVal="ctrl")
     WinLKey = createButton(row6, values, "Win", height=height6)
     AltLKey = createButton(row6, values, "Alt", height=height6, changeVal="alt")
@@ -392,11 +386,7 @@ def colemakBoard(values, currentProfileName): # creates a tkinter window object 
     MenuKey = createButton(row6, values, "Menu", height=height6)
     CtrlRKey = createButton(row6, values, "Ctrl", width=6, height=height6, changeVal="ctrl")
     
-
-
-
     home.mainloop()
-
 
 Profiles = open("Saves/Profiles.txt", "r")
 currentProfileName = Profiles.readline()
