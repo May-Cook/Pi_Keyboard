@@ -10,7 +10,7 @@ The project was written in `python` and uses `tkinter` to create the UI
 
 to run the application, just run `Keyboard.py`
 
-The keyboard currently just prints the corresponding character to the terminal when a key is pressed.
+The keyboard was meant to be able to send characters to other devices, but this functionality was never implemented. For this reason the `send()` function is used as a placeholder for sending a keypress to another device, it currently just prints the character to console
 
 ### Profiles
 
