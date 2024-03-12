@@ -388,8 +388,8 @@ def colemakBoard(values, currentProfileName): # creates a tkinter window object 
     
     home.mainloop()
 
-Profiles = open("Saves/Profiles.txt", "r")
-currentProfileName = Profiles.readline()
+profiles = open("Saves/Profiles.txt", "r")
+currentProfileName = profiles.readline()
 currentProfileName = currentProfileName.replace("\n", "")
 currentProfile = open("Saves/"+ currentProfileName +".txt", "rb")
 values = currentProfile.readlines()
